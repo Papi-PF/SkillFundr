@@ -12,6 +12,6 @@ class LearningPathsController < ApplicationController
 
   def show
     @learning_path = current_user.learning_paths.find(params[:id])
-    @milestones = @learning_path.milestones.order(:position)
+    @milestones = Milestone.all
   end
 end
