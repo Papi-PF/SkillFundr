@@ -1,0 +1,7 @@
+<h1><%= @skill.name %></h1>
+<p><%= @skill.description %></p>
+
+<%= form_with url: learning_paths_path, method: :post do |form| %>
+  <%= form.hidden_field :skill_id, value: @skill.id %>
+  <%= form.submit "Start Learning" %>
+<% end %>

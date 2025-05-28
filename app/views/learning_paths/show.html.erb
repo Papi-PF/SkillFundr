@@ -1,0 +1,13 @@
+<h1><%= @learning_path.skill.name %> Learning Path</h1>
+
+<ul>
+  <% @milestones.each do |milestone| %>
+    <li>
+      <strong><%= milestone.title %></strong>
+      <p><%= milestone.description %></p>
+      <p>Status: <%= milestone.completed ? "Completed" : "Not Completed" %></p>
+
+      <%= link_to 'Mark as Complete', learning_path_milestone_path(@learning_path, milestone), method: :patch %>
+    </li>
+  <% end %>
+</ul>

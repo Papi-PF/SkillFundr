@@ -1,0 +1,9 @@
+<%= form_with model: [@learning_path, @milestone], local: true do |form| %>
+  <p><strong><%= @milestone.title %></strong></p>
+  <p><%= @milestone.description %></p>
+
+  <%= form.check_box :completed %>
+  <%= form.label :completed, "Mark as Completed" %>
+
+  <%= form.submit "Update" %>
+<% end %>
