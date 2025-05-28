@@ -7,7 +7,7 @@
       <p><%= milestone.description %></p>
       <p>Status: <%= milestone.completed ? "Completed" : "Not Completed" %></p>
 
-      <%= link_to 'Mark as Complete', learning_path_milestone_path(@learning_path, milestone), method: :patch %>
+      <%= link_to 'Mark as Complete', learning_path_milestone_path(milestone), method: :patch %>
     </li>
   <% end %>
 </ul>
