@@ -1,0 +1,9 @@
+<h1>Your Learning Paths</h1>
+
+<ul>
+  <% @learning_paths.each do |path| %>
+    <li>
+      <%= link_to path.skill.name, learning_path_path(path) %>
+    </li>
+  <% end %>
+</ul>
