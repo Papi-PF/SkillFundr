@@ -8,20 +8,20 @@ class MilestonesController < ApplicationController
 
   def update
     if @milestone.update(milestone_params)
-      redirect_to learning_path_path(@learning_path), notice: "Milestone marked as completed!"
+      redirect_to learning_path_path(@milestone.learning_path), notice: "Milestone marked as completed!"
     else
-      redirect_to learning_path_path(@learning_path), alert: "Failed to mark milestone as completed."
+      redirect_to learning_path_path(@milestone.learning_path), alert: "Failed to mark milestone as completed."
     end
   end
 
   private
 
-  def set_learning_path
-    @learning_path = current_user.learning_paths.find(params[:learning_path_id])
-  end
-
   def set_milestone
-    @milestone = @learning_path.milestones.find(params[:id])
+    @milestone = Milestone.find(params[:id])
+    # Ensure the milestone belongs to a learning path owned by the current user
+    unless @milestone.learning_path.user == current_user
+      redirect_to root_path, alert: "You don't have permission to edit this milestone."
+    end
   end
 
   def milestone_params

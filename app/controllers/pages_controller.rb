@@ -5,6 +5,6 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @learning_path = current_user.learning_paths
+    @learning_paths = current_user.learning_paths
   end
 end
