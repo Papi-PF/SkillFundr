@@ -1,0 +1,11 @@
+<div class="list-group" data-controller="contacts-list">
+  <% @skills.each do |skill| %>
+    <%= link_to skill.name, skill_path(skill),
+      class: "list-group-item list-group-item-action #{'active' if skill == selected_skill}",
+      data: {
+        turbo_frame: :skill_details,
+        turbo_action: :advance,
+        action: "click->skills-list#highlight",
+        skills_list_target: "skill" } %>
+  <% end %>
+</div>

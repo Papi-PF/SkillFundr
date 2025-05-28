@@ -1,9 +1,9 @@
-<h1>Available Skills</h1>
+<% content_for :head do %>
+  <meta name="turbo-refresh-method" content="morph">
+  <meta name="turbo-refresh-scroll" content="preserve">
+<% end %>
 
-<ul>
-  <% @skills.each do |skill| %>
-    <li>
-      <%= link_to skill.name, skill_path(skill) %>
-    </li>
-  <% end %>
-</ul>
+<div class="skills-grid">
+  <%= render 'skills/list', skills: @skills, selected_skill: nil %>
+  <div class="text-secondary">chosse a skill to see more details </div>
+</div>
