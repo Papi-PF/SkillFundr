@@ -11,6 +11,7 @@ class LearningPathsController < ApplicationController
   end
 
   def show
+    #recommited
     @learning_path = current_user.learning_paths.find(params[:id])
     @milestones = Milestone.all
   end
