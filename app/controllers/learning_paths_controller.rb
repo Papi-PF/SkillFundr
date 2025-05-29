@@ -22,9 +22,13 @@ class LearningPathsController < ApplicationController
     # This finds the learning path by ID, that is if it belongs to the current user.
     # makes sure user A can't access user B learning paths.
     @learning_path = current_user.learning_paths.find(params[:id])
+<<<<<<< HEAD
 
     # Collects all milestones per learning path and sort them by position.
     # Now the positions ensures each milestones are shown in the correct order.
     @milestones = @learning_path.milestones.order(:position)
+=======
+    @milestones = Milestone.all
+>>>>>>> 45b64923b3e575c6b3e56116163c9d15095615c7
   end
 end
