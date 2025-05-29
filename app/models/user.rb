@@ -1,8 +1,5 @@
 class User < ApplicationRecord
-  # User can have many learning paths.
-  has_many :learning_paths
-
-  # User can access many skills via learning paths.
+  has_many :learning_paths, dependent: :destroy
   has_many :skills, through: :learning_paths
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

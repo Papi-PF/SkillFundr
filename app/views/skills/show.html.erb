@@ -1,15 +1,5 @@
-<div style="background-image: url('/assets/background.jpg'); background-size: cover; background-position: center; padding: 2rem;">
-  <h1 class="text-center"><%= @skill.name %></h1>
-  <p class="text-center"><%= @skill.description %></p>
+
+<div class="skills-grid">
+  <%= render 'skills/list', skills: @skills, selected_skill: @skill %>
+  <%= render 'skills/details', skill: @skill %>
 </div>
-
-
-<% if user_signed_in? %>
-  <% if @learning_path.present? %>
-    <%= link_to "Continue Learning", learning_path_path(@learning_path), class: "btn btn-primary" %>
-  <% else %>
-    <%= button_to "Start Learning", learning_paths_path(skill_id: @skill.id), method: :post, class: "btn btn-success" %>
-  <% end %>
-<% else %>
-  <%= link_to "Sign in to start learning", new_user_session_path, class: "btn btn-warning" %>
-<% end %>

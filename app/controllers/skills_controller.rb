@@ -9,6 +9,7 @@ class SkillsController < ApplicationController
 
   # GET /skills/1
   def show
+    @skills = Skill.all
     # look for the skills based on ID via url
     @skill = Skill.find(params[:id])
   end
