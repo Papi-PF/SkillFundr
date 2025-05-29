@@ -10,6 +10,53 @@
 
 # Clear existing data to start fresh
 # Destroy in reverse order of dependency to avoid foreign key errors
+
+# Mocked AI function to generate learning path milestones
+def ai_generate_milestones(skill_name)
+  case skill_name
+  when "Full-stack Web Development"
+    [
+      { title: "Learn HTML & CSS", description: "Build basic web pages using HTML and style them with CSS." },
+      { title: "JavaScript Fundamentals", description: "Understand variables, functions, and DOM manipulation in JavaScript." },
+      { title: "Intro to Ruby on Rails", description: "Create a simple blog application using Ruby on Rails." },
+      { title: "React Basics", description: "Build interactive UI components using React.js." },
+      { title: "Deploy Your App", description: "Deploy your final project to Heroku or Render." }
+    ]
+  when "Data Science"
+    [
+      { title: "Python Basics", description: "Install and run Python. Learn about variables, loops, and conditionals." },
+      { title: "Pandas & NumPy", description: "Use Pandas and NumPy to clean and manipulate data." },
+      { title: "Visualization with Matplotlib/Seaborn", description: "Plot charts and graphs to visualize data insights." },
+      { title: "Machine Learning Introduction", description: "Learn the basics of supervised and unsupervised learning." },
+      { title: "Build a Data Model", description: "Train and evaluate a model using scikit-learn." }
+    ]
+  when "Mobile App Development"
+    [
+      { title: "Learn Swift/Kotlin", description: "Get started with either Swift (iOS) or Kotlin (Android)." },
+      { title: "UI Components", description: "Build layouts and use buttons, text fields, and views." },
+      { title: "Navigation & Routing", description: "Move between screens and pass data." },
+      { title: "API Integration", description: "Fetch and display data from external APIs." },
+      { title: "App Deployment", description: "Package and publish your app to Google Play or the App Store." }
+    ]
+  when "UX/UI Design"
+    [
+      { title: "Design Principles", description: "Understand typography, spacing, and color theory." },
+      { title: "Wireframing", description: "Sketch out page layouts and user flows." },
+      { title: "Prototyping", description: "Create clickable prototypes with Figma or Adobe XD." },
+      { title: "User Testing", description: "Gather feedback from real users to improve design." },
+      { title: "Final Portfolio Piece", description: "Create a polished design to showcase in your portfolio." }
+    ]
+  else
+    [
+      { title: "Introduction to #{skill_name}", description: "Start with the fundamentals of #{skill_name}." },
+      { title: "Core Concepts", description: "Dive into key concepts and tools used in #{skill_name}." },
+      { title: "Project Practice", description: "Apply what you've learned with hands-on projects." },
+      { title: "Advanced Topics", description: "Explore advanced techniques and best practices." },
+      { title: "Capstone Project", description: "Build a final project to demonstrate mastery." }
+    ]
+  end
+end
+
 Milestone.destroy_all
 LearningPath.destroy_all
 Skill.destroy_all
@@ -21,7 +68,7 @@ puts "Old data cleared successfully!"
 users_data = [
   { email: "alexis@yahoo.com", password: "password", name: "Alexis" },
   { email: "yu@example.com", password: "password", name: "Yu" },
-  { email: "Annie@dev.com", password: "password", name: "Annie" }
+  { email: "annie@dev.com", password: "password", name: "Annie" }
 ]
 
 users = users_data.map do |attrs|
@@ -89,49 +136,3 @@ users.each_with_index do |user, index|
 end
 
 puts "\nSeed data created successfully!"
-
-# Mocked AI function to generate learning path milestones
-def ai_generate_milestones(skill_name)
-  case skill_name
-  when "Full-stack Web Development"
-    [
-      { title: "Learn HTML & CSS", description: "Build basic web pages using HTML and style them with CSS." },
-      { title: "JavaScript Fundamentals", description: "Understand variables, functions, and DOM manipulation in JavaScript." },
-      { title: "Intro to Ruby on Rails", description: "Create a simple blog application using Ruby on Rails." },
-      { title: "React Basics", description: "Build interactive UI components using React.js." },
-      { title: "Deploy Your App", description: "Deploy your final project to Heroku or Render." }
-    ]
-  when "Data Science"
-    [
-      { title: "Python Basics", description: "Install and run Python. Learn about variables, loops, and conditionals." },
-      { title: "Pandas & NumPy", description: "Use Pandas and NumPy to clean and manipulate data." },
-      { title: "Visualization with Matplotlib/Seaborn", description: "Plot charts and graphs to visualize data insights." },
-      { title: "Machine Learning Introduction", description: "Learn the basics of supervised and unsupervised learning." },
-      { title: "Build a Data Model", description: "Train and evaluate a model using scikit-learn." }
-    ]
-  when "Mobile App Development"
-    [
-      { title: "Learn Swift/Kotlin", description: "Get started with either Swift (iOS) or Kotlin (Android)." },
-      { title: "UI Components", description: "Build layouts and use buttons, text fields, and views." },
-      { title: "Navigation & Routing", description: "Move between screens and pass data." },
-      { title: "API Integration", description: "Fetch and display data from external APIs." },
-      { title: "App Deployment", description: "Package and publish your app to Google Play or the App Store." }
-    ]
-  when "UX/UI Design"
-    [
-      { title: "Design Principles", description: "Understand typography, spacing, and color theory." },
-      { title: "Wireframing", description: "Sketch out page layouts and user flows." },
-      { title: "Prototyping", description: "Create clickable prototypes with Figma or Adobe XD." },
-      { title: "User Testing", description: "Gather feedback from real users to improve design." },
-      { title: "Final Portfolio Piece", description: "Create a polished design to showcase in your portfolio." }
-    ]
-  else
-    [
-      { title: "Introduction to #{skill_name}", description: "Start with the fundamentals of #{skill_name}." },
-      { title: "Core Concepts", description: "Dive into key concepts and tools used in #{skill_name}." },
-      { title: "Project Practice", description: "Apply what you've learned with hands-on projects." },
-      { title: "Advanced Topics", description: "Explore advanced techniques and best practices." },
-      { title: "Capstone Project", description: "Build a final project to demonstrate mastery." }
-    ]
-  end
-end
