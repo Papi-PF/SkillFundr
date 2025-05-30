@@ -4,6 +4,9 @@ class PagesController < ApplicationController
   # GET /
   def home
     # Homepage
+     @featured_skills = Skill.all.limit(6)  # Temporary solution
+  rescue
+    @featured_skills = []
   end
 
   # GET /dashboard
