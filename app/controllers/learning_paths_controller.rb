@@ -16,10 +16,9 @@ class LearningPathsController < ApplicationController
       redirect_to root_path, alert: "Failed to create learning path."
     end
   end
-  
+
   def show
-    #recommited
-    @learning_path = current_user.learning_paths.find(params[:id])
-    @milestones = Milestone.all
+    @learning_path = LearningPath.find(params[:id])
+    @milestones = @learning_path.milestones
   end
 end
