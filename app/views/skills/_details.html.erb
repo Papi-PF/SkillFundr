@@ -9,14 +9,20 @@
       </div>
       <h1 class="main-title mb-4 mb-lg-32px"><%= @skill.name %></h1>
       <p><%= @skill.description %></p>
-      <% if user_signed_in? %>
-        <% if @learning_path.present? %>
-          <%= link_to "Continue Learning", learning_path_path(@learning_path), class: "btn btn-primary" %>
-        <% else %>
-          <%= button_to "Start Learning", learning_paths_path(skill_id: @skill.id), method: :post, class: "btn btn-info" %>
-        <% end %>
+      <% if current_user.learning_paths.exists?(skill_id: @skill.id) %>
+        <div class="alert alert-info d-flex align-items-center">
+          <i class="bi bi-info-circle me-2"></i>
+          You've already started learning <strong class="mx-1"><%= @skill.name %></strong>!
+        </div>
       <% else %>
-        <%= link_to "Sign in to start learning", new_user_session_path, class: "btn btn-info" %>
+        <%= form_with url: learning_paths_path, method: :post, class: "mt-3" do |form| %>
+          <%= form.hidden_field :skill_id, value: @skill.id %>
+          <div class="text-end">
+              <%= form.submit "Start Learning",
+                      class: "btn btn-info",
+                      data: { turbo: false } %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
     </div>
