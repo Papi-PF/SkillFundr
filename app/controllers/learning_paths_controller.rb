@@ -19,7 +19,7 @@ class LearningPathsController < ApplicationController
 
   def show
     # Find the learning path by ID, ensuring it belongs to the current user
-    @learning_path = current_user.learning_paths.find_by(id: params[:id])
+    @learning_path = current_user.learning_paths.find(params[:id])
 
     if @learning_path.nil?
       redirect_to dashboard_path, alert: "You don't have access to this learning path."
@@ -28,6 +28,9 @@ class LearningPathsController < ApplicationController
 
     # Get all milestones for this learning path and sort them by position
     @milestones = @learning_path.milestones.order(:position)
+
+    # @learning_path = LearningPath.find(params[:id])
+    # @milestones = @learning_path.milestones
   end
 
   def destroy
