@@ -1,14 +1,23 @@
 <%= turbo_frame_tag :skill_details do %>
   <div class="col-12 col-lg-7 rounded-sm-24px" style="background-color: #98C1EC;">
-    <div class="p-3 p-lg-4 px-xl-9 py-4 py-xl-6">
+
+    <div class="p-3 p-lg-4 px-xl-9 py-4 py-xl-6 ">
       <div class="d-flex align-items-center mb-4">
         <div class="d-flex me-2">
-          <p class="m-0 fs-13 fw-600">Student Reviews</p>⭐️⭐️⭐️⭐️⭐️
+         <p class="m-0 fs-13 fw-600">Student Reviews</p>⭐️⭐️⭐️⭐️⭐️
         </div>
       </div>
       <h1 class="main-title mb-4 mb-lg-32px"><%= @skill.name %></h1>
       <p><%= @skill.description %></p>
-      <!-- Removed "Start Learning" button -->
+      <% if user_signed_in? %>
+        <% if @learning_path.present? %>
+          <%= link_to "Continue Learning", learning_path_path(@learning_path), class: "btn btn-primary" %>
+        <% else %>
+          <%= button_to "Start Learning", learning_paths_path(skill_id: @skill.id), method: :post, class: "btn btn-info" %>
+        <% end %>
+      <% else %>
+        <%= link_to "Sign in to start learning", new_user_session_path, class: "btn btn-info" %>
+      <% end %>
+    <% end %>
     </div>
   </div>
-<% end %>

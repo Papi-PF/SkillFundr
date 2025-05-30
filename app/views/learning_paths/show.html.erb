@@ -41,7 +41,23 @@
   <p class="text-muted text-center mt-4">No milestones available yet.</p>
 <% end %>
 
-<!-- Start Learning Button -->
-<% if user_signed_in? && !@learning_path %>
-  <%= button_to "Start Learning", learning_paths_path(skill_id: @learning_path.skill.id), method: :post, class: "btn btn-info" %>
-<% end %>
+<div class="container">
+  <div class="header-container">
+    <h1><%= @learning_path.skill.name %> Learning Path</h1>
+  </div>
+  <div class="cards">
+    <div class="row">
+      <% @milestones.each do |milestone| %>
+        <div class="col-6">
+            <div class="card-category"
+              style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3))">
+            </div>
+            <div class="card-details">
+              <h1 class="card-title"><strong><%= milestone.title %></strong></h1>
+              <p>Status: <%= milestone.completed ? "Completed" : "Not Completed" %></p>
+            </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
