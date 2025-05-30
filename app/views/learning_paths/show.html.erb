@@ -1,11 +1,47 @@
 <h1><%= @learning_path.skill.name %> Learning Path</h1>
+<p><%= @learning_path.skill.description %></p>
 
-<ul>
-  <% @milestones.each do |milestone| %>
-    <li>
-      <strong><%= milestone.title %></strong>
-      <p><%= milestone.description %></p>
-      <p>Status: <%= milestone.completed ? "Completed" : "Not Completed" %></p>
-    </li>
-  <% end %>
-</ul>
+<!-- Roadmap Section -->
+<div class="mt-4">
+  <h4 class="text-center">Study Roadmap</h4>
+  <ul class="list-group w-100">
+    <%= raw(@learning_path.skill.roadmap.split("\n").map do |line|
+      "<li class='list-group-item'>#{line}</li>"
+    end.join) %>
+  </ul>
+</div>
+
+<!-- Progress Bar -->
+<% if @milestones.any? %>
+  <div class="mt-4">
+    <progress
+      class="w-100"
+      value="<%= @milestones.where(completed: true).count %>"
+      max="<%= @milestones.count %>">
+    </progress>
+    <p class="text-center mt-2">
+      Progress: <%= (@milestones.where(completed: true).count / @milestones.count.to_f * 100).round(1) %>% complete
+    </p>
+  </div>
+<% end %>
+
+<!-- Milestone List -->
+<% if @milestones.any? %>
+  <ul class="list-group w-75 mx-auto mt-4">
+    <% @milestones.each do |milestone| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <strong><%= milestone.title %></strong>
+        <span class="badge <%= milestone.completed ? 'bg-success' : 'bg-secondary' %> rounded-pill">
+          <%= milestone.completed ? '✅ Completed' : '❌ Not Completed' %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="text-muted text-center mt-4">No milestones available yet.</p>
+<% end %>
+
+<!-- Start Learning Button -->
+<% if user_signed_in? && !@learning_path %>
+  <%= button_to "Start Learning", learning_paths_path(skill_id: @learning_path.skill.id), method: :post, class: "btn btn-info" %>
+<% end %>

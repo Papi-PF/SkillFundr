@@ -1,5 +1,79 @@
+<div class="container mt-4">
+  <div class="row g-4">
+    <!-- Skills List Column -->
+    <div class="col-lg-5">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-3">
+          <%= render 'skills/list', skills: @skills, selected_skill: @skill %>
+        </div>
+      </div>
+    </div>
 
-<div class="skills-grid">
-  <%= render 'skills/list', skills: @skills, selected_skill: @skill %>
-  <%= render 'skills/details', skill: @skill %>
+    <!-- Skill Details Column -->
+    <div class="col-lg-7">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <%= render 'skills/details', skill: @skill %>
+
+          <!-- Roadmap Section -->
+          <div class="mt-4">
+            <h4 class="text-center">Study Roadmap</h4>
+            <ul class="list-group w-100">
+              <%= raw(@skill.roadmap.split("\n").map do |line|
+                "<li class='list-group-item d-flex justify-content-between align-items-center'>#{line}</li>"
+              end.join) %>
+            </ul>
+          </div>
+
+          <!-- Progress Bar -->
+          <% if current_user.learning_paths.exists?(skill_id: @skill.id) %>
+            <div class="mt-4">
+              <h5 class="mb-3 text-center">Your Progress</h5>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar"
+                     style="width: <%= (@skill.milestones.where(completed: true).count.to_f / @skill.milestones.count * 100) %>%;"
+                     aria-valuenow="<%= @skill.milestones.where(completed: true).count %>"
+                     aria-valuemin="0" aria-valuemax="<%= @skill.milestones.count %>">
+                  <%= "#{(@skill.milestones.where(completed: true).count.to_f / @skill.milestones.count * 100).round(1)}%" %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+          <!-- Milestone Preview (Only if not started yet) -->
+          <% unless current_user.learning_paths.exists?(skill_id: @skill.id) %>
+            <div class="mt-4">
+              <h5 class="mb-3 text-center">What You'll Learn</h5>
+              <% if generate_milestones(@skill.name).present? %>
+                <ul class="list-group w-100">
+                  <%= raw(generate_milestones(@skill.name).map do |milestone|
+                    "<li class='list-group-item'>#{milestone[:title]}</li>"
+                  end.join) %>
+                </ul>
+              <% else %>
+                <p>No milestones available for this skill.</p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Learning Path Section -->
+      <div class="mt-4">
+        <% if current_user.learning_paths.exists?(skill_id: @skill.id) %>
+          <div class="alert alert-info d-flex align-items-center">
+            <i class="bi bi-info-circle me-2"></i>
+            You've already started learning <strong class="mx-1"><%= @skill.name %></strong>!
+          </div>
+        <% else %>
+          <%= form_with url: learning_paths_path, method: :post, class: "mt-3" do |form| %>
+            <%= form.hidden_field :skill_id, value: @skill.id %>
+            <%= form.submit "Start Learning",
+                    class: "btn btn-success btn-lg w-100 py-3 fw-bold",
+                    data: { turbo: false } %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
