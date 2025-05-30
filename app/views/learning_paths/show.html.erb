@@ -1,63 +1,54 @@
-<h1><%= @learning_path.skill.name %> Learning Path</h1>
-<p><%= @learning_path.skill.description %></p>
-
-<!-- Roadmap Section -->
-<div class="mt-4">
-  <h4 class="text-center">Study Roadmap</h4>
-  <ul class="list-group w-100">
-    <%= raw(@learning_path.skill.roadmap.split("\n").map do |line|
-      "<li class='list-group-item'>#{line}</li>"
-    end.join) %>
-  </ul>
-</div>
-
-<!-- Progress Bar -->
-<% if @milestones.any? %>
-  <div class="mt-4">
-    <progress
-      class="w-100"
-      value="<%= @milestones.where(completed: true).count %>"
-      max="<%= @milestones.count %>">
-    </progress>
-    <p class="text-center mt-2">
-      Progress: <%= (@milestones.where(completed: true).count / @milestones.count.to_f * 100).round(1) %>% complete
-    </p>
-  </div>
-<% end %>
-
-<!-- Milestone List -->
-<% if @milestones.any? %>
-  <ul class="list-group w-75 mx-auto mt-4">
-    <% @milestones.each do |milestone| %>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <strong><%= milestone.title %></strong>
-        <span class="badge <%= milestone.completed ? 'bg-success' : 'bg-secondary' %> rounded-pill">
-          <%= milestone.completed ? '✅ Completed' : '❌ Not Completed' %>
-        </span>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p class="text-muted text-center mt-4">No milestones available yet.</p>
-<% end %>
-
+ <h1><%= @learning_path.skill.name %> Learning Path</h1>
+ 
 <div class="container">
-  <div class="header-container">
-    <h1><%= @learning_path.skill.name %> Learning Path</h1>
+
+  <p><%= @learning_path.skill.description %></p>
+
+
+  <!-- Roadmap Section -->
+  <div class="mt-4">
+    <h4 class="text-center">Study Roadmap</h4>
+    <ul class="list-group w-100">
+      <%= raw(@learning_path.skill.roadmap.split("\n").map do |line|
+        "<li class='list-group-item'>#{line}</li>"
+      end.join) %>
+    </ul>
   </div>
-  <div class="cards">
+
+  <!-- Progress Bar -->
+  <% if @milestones.any? %>
+    <div class="mt-4">
+      <progress
+        class="w-100"
+        value="<%= @milestones.where(completed: true).count %>"
+        max="<%= @milestones.count %>">
+      </progress>
+      <p class="text-center mt-2">
+        Progress: <%= (@milestones.where(completed: true).count / @milestones.count.to_f * 100).round(1) %>% complete
+      </p>
+    </div>
+  <% end %>
+
+  <!-- Milestone List -->
+  <% if @milestones.any? %>
+     <div class="cards">
     <div class="row">
       <% @milestones.each do |milestone| %>
-        <div class="col-6">
-            <div class="card-category"
-              style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3))">
-            </div>
-            <div class="card-details">
-              <h1 class="card-title"><strong><%= milestone.title %></strong></h1>
-              <p>Status: <%= milestone.completed ? "Completed" : "Not Completed" %></p>
-            </div>
+        <div class="card-product">
+          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+          <div class="card-product-infos">
+            <h2 class="card-title"><strong><%= milestone.title %></strong></h2>
+
+            <span class="badge <%= milestone.completed ? 'bg-success' : 'bg-secondary' %> rounded-pill">
+              <%= milestone.completed ? '✅ Completed' : '❌ Not Completed' %>
+            </span>
+          </div>
         </div>
       <% end %>
     </div>
   </div>
+  <% else %>
+    <p class="text-muted text-center mt-4">No milestones available yet.</p>
+  <% end %>
+
 </div>
