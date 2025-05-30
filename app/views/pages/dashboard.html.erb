@@ -1,7 +1,7 @@
 <h1 class="mb-4">My Learning Paths</h1>
 
 <% current_user.learning_paths.each do |lp| %>
-  <div class="card mb-3">
+  <div class="card learning-path-card mb-3">
     <div class="card-header d-flex justify-content-between align-items-center">
       <%= link_to lp.skill.name, learning_path_path(lp) %> (
         <%= lp.milestones.where(completed: true).count %>/
