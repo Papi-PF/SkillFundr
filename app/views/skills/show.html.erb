@@ -2,30 +2,64 @@
   <%= render 'skills/list', skills: @skills, selected_skill: @skill %>
   <%= render 'skills/details', skill: @skill %>
 
-    <!-- Roadmap Section -->
-    <div class="mt-4">
-      <h4 class="text-center">Study Roadmap</h4>
-      <ul class="list-group w-100">
-        <%= raw(@skill.roadmap.split("\n").map do |line|
-          "<li class='list-group-item d-flex justify-content-between align-items-center'>#{line}</li>"
-        end.join) %>
-      </ul>
+    <!-- Study Roadmap as Card with Custom Border Color -->
+    <div class="mt-5">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body">
+          <h4 class="text-center mb-4">🧭 Study Roadmap</h4>
+
+          <div class="position-relative ps-4" style="border-left: 4px solid #192062;">
+
+            <%= raw(@skill.roadmap.split("\n").map.with_index do |line, index|
+              <<-HTML
+                <div class="mb-4 position-relative">
+                  <!-- Step Bullet -->
+                  <div class="position-absolute top-0 start-0 translate-middle rounded-circle"
+                      style="width: 14px; height: 14px; background-color: #192062;">
+                  </div>
+
+                  <!-- Step Content -->
+                  <div class="ms-3">
+                    <h6 class="fw-semibold mb-1">Step #{index + 1}</h6>
+                    <p class="mb-0 text-muted">#{line.strip}</p>
+                  </div>
+                </div>
+              HTML
+            end.join) %>
+
+          </div>
+        </div>
+      </div>
     </div>
+
 
               <!-- Progress Bar -->
     <% if current_user.learning_paths.exists?(skill_id: @skill.id) %>
       <div class="mt-4">
         <h5 class="mb-3 text-center">Your Progress</h5>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar"
-                style="width: <%= (@skill.milestones.where(completed: true).count.to_f / @skill.milestones.count * 100) %>%;"
-                aria-valuenow="<%= @skill.milestones.where(completed: true).count %>"
-                aria-valuemin="0" aria-valuemax="<%= @skill.milestones.count %>">
-            <%= "#{(@skill.milestones.where(completed: true).count.to_f / @skill.milestones.count * 100).round(1)}%" %>
+
+        <% completed = @skill.milestones.where(completed: true).count %>
+        <% total = @skill.milestones.count %>
+        <% percent = total.positive? ? (completed.to_f / total * 100).round(1) : 0 %>
+
+        <div class="progress" style="height: 30px; border-radius: 15px; background-color: #e9ecef;">
+          <div class="progress-bar bg-success"
+              role="progressbar"
+              style="width: <%= percent %>%; border-radius: 15px; background: linear-gradient(90deg, #28a745, #218838);"
+              aria-valuenow="<%= completed %>"
+              aria-valuemin="0"
+              aria-valuemax="<%= total %>">
+            <span class="fw-bold text-white"><%= "#{percent}%" %></span>
           </div>
         </div>
+
+        <p class="text-center mt-2 text-muted small">
+          <%= "#{completed} of #{total} milestones completed" %>
+        </p>
       </div>
     <% end %>
+
+
 
               <!-- Milestone Preview (Only if not started yet) -->
     <% unless current_user.learning_paths.exists?(skill_id: @skill.id) %>
