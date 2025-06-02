@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container mt-4">
   <div class="row g-4">
     <!-- Skills List Column -->
@@ -61,4 +62,18 @@
       <!-- Learning Path Section -->
     </div>
   </div>
+=======
+<div class="skills-grid">
+  <%= render 'skills/list', skills: @skills, selected_skill: @skill %>
+  <%= render 'skills/details', skill: @skill %>
+>>>>>>> origin
 </div>
+
+<% if current_user.learning_paths.exists?(skill_id: @skill.id) %>
+  <p class="alert alert-info">You've already started learning <%= @skill.name %>!</p>
+<% else %>
+  <%= form_with url: learning_paths_path, method: :post do |form| %>
+    <%= form.hidden_field :skill_id, value: @skill.id %>
+    <%= form.submit "Start Learning" %>
+  <% end %>
+<% end %>
