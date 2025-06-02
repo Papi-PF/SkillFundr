@@ -7,16 +7,14 @@
          <p class="m-0 fs-13 fw-600">Student Reviews</p>⭐️⭐️⭐️⭐️⭐️
         </div>
       </div>
-      <h1 class="main-title mb-4 mb-lg-32px"><%= @skill.name %></h1>
-      <p><%= @skill.description %></p>
-      <% if current_user.learning_paths.exists?(skill_id: @skill.id) %>
-        <div class="alert alert-info d-flex align-items-center">
-          <i class="bi bi-info-circle me-2"></i>
-          You've already started learning <strong class="mx-1"><%= @skill.name %></strong>!
-        </div>
+      <h1 class="main-title mb-4 mb-lg-32px"><%= skill.name %></h1>
+      <p><%= skill.description %></p>
+      <% if current_user.learning_paths.exists?(skill_id: skill.id) %>
+        <% skill_name=skill.name %>
+        <%= render 'shared/flashes', notice:"You've already started learning #{skill_name}" %>
       <% else %>
         <%= form_with url: learning_paths_path, method: :post, class: "mt-3" do |form| %>
-          <%= form.hidden_field :skill_id, value: @skill.id %>
+          <%= form.hidden_field :skill_id, value: skill.id %>
           <div class="text-end">
               <%= form.submit "Start Learning",
                       class: "btn btn-info",

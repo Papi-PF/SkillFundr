@@ -5,6 +5,7 @@ class SkillsController < ApplicationController
   def index
     # Will fetch all skills that are available and display in a list
     @skills = Skill.all
+    @selected_skill = Skill.first
   end
 
   # GET /skills/1

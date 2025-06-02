@@ -1,4 +1,4 @@
-<div class="list-group" data-controller="skills-list" style="background-image: url('/assets/background.jpg'); background-size: cover; background-position: center; padding: 2rem;">
+<div class="list-group" data-controller="skills-list" style="background-image: url('/assets/back.webp'); background-size: cover; background-position: center; padding: 2rem;">
   <% @skills.each do |skill| %>
     <%= link_to skill.name, skill_path(skill),
       class: "#{'active' if skill == (selected_skill || nil)} list-group-item list-group-item-action",

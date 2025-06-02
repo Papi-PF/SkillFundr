@@ -9,7 +9,11 @@
         </p>
         <div class="d-flex justify-content-center gap-3">
           <%= link_to "Explore Courses", skills_path, class: "btn btn-primary btn-lg px-5 py-3" %>
-          <%= link_to "Join Now", new_user_registration_path, class: "btn btn-outline-light btn-lg px-5 py-3" %>
+          <% unless user_signed_in? %>
+            <%= link_to "Join Now", new_user_registration_path, class: "btn btn-outline-light btn-lg px-5 py-3" %>
+          <% else %>
+            <%= link_to "Dashboard",  dashboard_path, class: "btn btn-outline-light btn-lg px-5 py-3" %>
+          <% end %>
         </div>
       </div>
     </div>
