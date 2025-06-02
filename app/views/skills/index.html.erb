@@ -1,4 +1,45 @@
+<div class="skills-grid")>
+  <%= render 'skills/list', skills: @skills, selected_skill: @selected_skill %>
+  <%= render 'skills/details', skill: @selected_skill %>
 
-<div class="skills-grid">
-  <%= render 'skills/list', skills: @skills, selected_skill: nil %>
+    <!-- Roadmap Section -->
+    <div class="mt-4">
+      <h4 class="text-center">Study Roadmap</h4>
+      <ul class="list-group w-100">
+        <%= raw(@selected_skill.roadmap.split("\n").map do |line|
+          "<li class='list-group-item d-flex justify-content-between align-items-center'>#{line}</li>"
+        end.join) %>
+      </ul>
+    </div>
+
+              <!-- Progress Bar -->
+    <% if current_user.learning_paths.exists?(skill_id: @selected_skill.id) %>
+      <div class="mt-4">
+        <h5 class="mb-3 text-center">Your Progress</h5>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar"
+                style="width: <%= (@selected_skill.milestones.where(completed: true).count.to_f / @selected_skill.milestones.count * 100) %>%;"
+                aria-valuenow="<%= @selected_skill.milestones.where(completed: true).count %>"
+                aria-valuemin="0" aria-valuemax="<%= @selected_skill.milestones.count %>">
+            <%= "#{(@selected_skill.milestones.where(completed: true).count.to_f / @selected_skill.milestones.count * 100).round(1)}%" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+              <!-- Milestone Preview (Only if not started yet) -->
+    <% unless current_user.learning_paths.exists?(skill_id: @selected_skill.id) %>
+      <div class="mt-4">
+        <h5 class="mb-3 text-center">What You'll Learn</h5>
+        <% if generate_milestones(@selected_skill.name).present? %>
+          <ul class="list-group w-100">
+            <%= raw(generate_milestones(@selected_skill.name).map do |milestone|
+              "<li class='list-group-item'>#{milestone[:title]}</li>"
+            end.join) %>
+          </ul>
+        <% else %>
+          <p>No milestones available for this skill.</p>
+        <% end %>
+      </div>
+    <% end %>
 </div>

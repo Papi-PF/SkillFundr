@@ -1,0 +1,17 @@
+learning-path.learning-path-card {
+  transition: transform 0.2s ease;
+  border-left: 4px solid #192062;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+
+  .progress {
+    background-color: #e9ecef;
+    border-radius: 1rem;
+  }
+
+  .progress-bar {
+    border-radius: 1rem;
+  }
+}
