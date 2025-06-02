@@ -1,5 +1,5 @@
  <h1><%= @learning_path.skill.name %> Learning Path</h1>
- 
+
 <div class="container">
 
   <p><%= @learning_path.skill.description %></p>
@@ -50,5 +50,7 @@
   <% else %>
     <p class="text-muted text-center mt-4">No milestones available yet.</p>
   <% end %>
+
+  <p><%= @learning_path.content %></p>
 
 </div>
