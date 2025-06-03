@@ -14,6 +14,4 @@ class Skill < ApplicationRecord
 
   validates :name, presence: true
   validates :description, presence: true
-  validates :roadmap, presence: true
-  validates :estimated_duration, presence: true
 end
