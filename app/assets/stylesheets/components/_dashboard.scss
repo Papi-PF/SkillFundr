@@ -1,0 +1,97 @@
+.dashboard-title {
+  text-align: center;
+  color: #192062;
+  margin: 2rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.dashboard-container {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.learning-card {
+  background: #fff;
+  border: 1px solid #e3e6f0;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  flex: 1 1 calc(33.333% - 1rem); // 3 cards per row with spacing
+  box-sizing: border-box;
+
+  .card-header {
+    background: linear-gradient(45deg, #0d6efd, #0b5ed7, #192062);
+    color: white;
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .skill-title {
+    margin: 0;
+    font-size: 1.25rem;
+
+    .skill-link {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s ease-in-out;
+
+      &:hover {
+        color: #192062;
+      }
+    }
+  }
+
+  .card-body {
+    padding: 1rem 1.25rem;
+
+    .skill-description {
+      margin-bottom: 1rem;
+      color: #444;
+    }
+
+    .progress {
+      height: 8px;
+      background: #e9ecef;
+      border-radius: 0.25rem;
+
+      .progress-bar {
+        background-color: #198754;
+        transition: width 0.6s ease;
+      }
+    }
+  }
+
+  .card-footer {
+    padding: 0.75rem 1.25rem;
+    background: #f8f9fa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .progress-label {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+
+    .delete-icon {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      color: #dc3545;
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
