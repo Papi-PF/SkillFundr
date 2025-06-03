@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_03_121834) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_03_081934) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,14 +19,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_03_121834) do
     t.bigint "skill_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status"
     t.index ["skill_id"], name: "index_learning_paths_on_skill_id"
     t.index ["user_id"], name: "index_learning_paths_on_user_id"
-  end
-
-  create_table "learning_paths_tables", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "milestones", force: :cascade do |t|
@@ -38,11 +32,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_03_121834) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["learning_path_id"], name: "index_milestones_on_learning_path_id"
-  end
-
-  create_table "milestones_tables", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "skills", force: :cascade do |t|
