@@ -1,37 +1,33 @@
-<h1 class="mb-4 text-center text-primary p-4">My Learning Paths</h1>
+<h1 class="dashboard-title">My Learning Paths</h1>
 
-<% current_user.learning_paths.each do |lp| %>
-  <% completed = lp.milestones.where(completed: true).count %>
-  <% total = lp.milestones.count %>
+<div class="dashboard-container">
+  <% current_user.learning_paths.each do |lp| %>
+    <% completed = lp.milestones.where(completed: true).count %>
+    <% total = lp.milestones.count %>
     <% percent = total > 0 ? (completed.to_f / total * 100).round : 0 %>
 
-  <div class="card learning-path-card shadow-sm border-primary mb-4">
-    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-      <div class="fw-semibold">
-        <%= link_to lp.skill.name, learning_path_path(lp), class: "text-white text-decoration-none" %>
+    <div class="learning-card">
+      <div class="card-header">
+        <h5 class="skill-title">
+          <%= link_to lp.skill.name, learning_path_path(lp), class: "skill-link" %>
+        </h5>
+        <small><%= completed %> / <%= total %> milestones</small>
       </div>
-      <small><%= completed %> / <%= total %> milestones</small>
-    </div>
 
-    <div class="card-body">
-      <p class="mb-3"><%= lp.skill.description %></p>
+      <div class="card-body">
+        <p class="skill-description"><%= lp.skill.description %></p>
 
-      <!-- Progress bar -->
-      <div class="progress" style="height: 8px;">
-        <div class="progress-bar bg-success" role="progressbar"
-             style="width: <%= percent %>%;" aria-valuenow="<%= completed %>"
-             aria-valuemin="0" aria-valuemax="<%= total %>"></div>
+        <div class="progress">
+          <div class="progress-bar" style="width: <%= percent %>%;" role="progressbar" aria-valuenow="<%= completed %>" aria-valuemin="0" aria-valuemax="<%= total %>"></div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <small class="progress-label">Progress: <%= percent %>%</small>
+        <%= button_to learning_path_path(lp), method: :delete, data: { turbo_method: :delete, confirm: "Are you sure you want to delete this learning path?" }, class: "delete-icon", title: "Delete" do %>
+          🗑️
+        <% end %>
       </div>
     </div>
-
-    <div class="card-footer d-flex justify-content-between align-items-center">
-      <small class="text-muted">Progress: <%= percent %>%</small>
-
-      <%= button_to learning_path_path(lp), method: :delete,
-                    data: { turbo_method: :delete, confirm: "Are you sure you want to delete this learning path?" },
-                    class: "btn btn-outline-danger btn-sm" do %>
-        <i class="bi bi-trash me-1"></i>Delete
-      <% end %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
