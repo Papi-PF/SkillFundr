@@ -9,5 +9,5 @@ class LearningPath < ApplicationRecord
   # makes sure both user and skill are present when learning path is created
   validates :user, presence: true
   validates :skill, presence: true
-  validates :skill_id, uniqueness: { scope: :user_id }
+  # validates :skill_id, uniqueness: { scope: :user_id }
 end
