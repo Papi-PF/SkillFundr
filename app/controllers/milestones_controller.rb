@@ -1,7 +1,7 @@
 class MilestonesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_learning_path
-  before_action :set_milestone, only: [:show, :update]
+  before_action :set_learning_path, only: [:mark_complete]
+  before_action :set_milestone, only: [:mark_complete]
 
   # GET /milestones/1
   def show
@@ -19,18 +19,34 @@ class MilestonesController < ApplicationController
     end
   end
 
-  private
+  def mark_complete
+    if @milestone.nil?
+      flash[:alert] = "Milestone not found."
+      redirect_to root_path
+      return
+    end
 
-  # Milestone loads based on ID from the URL
-  def set_milestone
-    @milestone = Milestone.find(params[:id])
-    # Ensure the milestone is part of a learning path owned by the current user
-    unless @milestone.learning_path.user == current_user
-      redirect_to root_path, alert: "You don't have permission to edit this milestone."
+    if @milestone.update(milestone_params)
+      redirect_to learning_path_path(@learning_path), notice: "Milestone completed!"
+    else
+      redirect_to :back, alert: "Failed to complete milestone."
     end
   end
 
-  # Allows only the `completed` params for updates
+  private
+
+  def set_milestone
+    @milestone = Milestone.find_by(id: params[:id])
+    # Optional: Add logging for debugging
+    # Rails.logger.debug "Milestone: #{@milestone.inspect}"
+  end
+
+  def set_learning_path
+    @learning_path = @milestone&.learning_path
+    # Optional: Add logging for debugging
+    # Rails.logger.debug "Learning Path: #{@learning_path.inspect}"
+  end
+
   def milestone_params
     params.require(:milestone).permit(:completed)
   end

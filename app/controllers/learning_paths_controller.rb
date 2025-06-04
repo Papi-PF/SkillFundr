@@ -3,34 +3,27 @@ class LearningPathsController < ApplicationController
 
   # POST /learning_paths/1
   def create
-    # Create a new learning part for log-in user
-    # from the form the skill id will come as a top parameter
-    @learning_path = current_user.learning_paths.new(skill_id: params[:skill_id])
+    skill = Skill.find(params[:skill_id])
+    learning_path = AiRoadmapGenerator.new(current_user, skill).generate_roadmap
 
-    # Save the learning path
-    if @learning_path.save
-      # If it works, redirect to show page of new learning path
-      redirect_to dashboard_path, notice: "Started learning #{@learning_path.skill.name}!"
+    if learning_path.persisted? && learning_path.id.present?
+      redirect_to learning_path_path(learning_path),
+                  notice: "Your learning path is ready!"
     else
-      # If not redict back to home
-      redirect_to root_path, alert: "Failed to create learning path."
+      # Handle failure (e.g., log errors or show a flash message)
+      flash[:alert] = "Failed to generate your learning path."
+      redirect_to root_path
     end
   end
 
   def show
-    # Find the learning path by ID, ensuring it belongs to the current user
-    @learning_path = current_user.learning_paths.find(params[:id])
+    @learning_path = LearningPath.find(params[:id])
+    @milestones = @learning_path.milestones.order(position: :asc)
 
-    if @learning_path.nil?
-      redirect_to dashboard_path, alert: "You don't have access to this learning path."
-      return
+    if @milestones.any?
+      @completed_count = @milestones.where(completed: true).count
+      @completion_percentage = (@completed_count.to_f / @milestones.count) * 100
     end
-
-    # Get all milestones for this learning path and sort them by position
-    @milestones = @learning_path.milestones.order(:position)
-
-    # @learning_path = LearningPath.find(params[:id])
-    # @milestones = @learning_path.milestones
   end
 
   def create_from_skill

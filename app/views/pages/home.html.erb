@@ -93,13 +93,12 @@
 <section class="py-6 py-lg-8" style="background-color: #f8fafc;">
   <div class="container">
     <div class="row g-5 align-items-center">
-      <div class="col-lg-6">
+      <div class="text-center bottom-of-container">
         <div class="pe-lg-5 pt-3">
           <h2 class="display-5 fw-bold mb-4 text-dark" style="font-size: 40px">Transform Your Career</h2>
           <p class="text-muted mb-5">
             Join thousands who've transformed their careers with our programs
           </p>
-
           <div class="bg-white p-4 p-md-5 rounded-3 shadow-sm">
             <div class="d-flex align-items-start mb-4">
               <div class="flex-shrink-0">
@@ -125,18 +124,18 @@
         </div>
       </div>
 
-      <div class="col-lg-6">
-        <div class="ps-lg-5">
-          <h3 class="h4 mb-4 text-center text-lg-start text-dark">Top tech companies hire our graduates</h3>
-          <div class="company-grid">
-            <% ["Meta", "Airbnb", "Google", "Accenture", "IBM", "Shopify"].each do |company| %>
-              <div class="company-item bg-white rounded-3 p-3 shadow-sm text-center fw-medium">
-                <%= image_tag "#{company.downcase}_logo.png", alt: company, class: "img-fluid" %>
-              </div>
-            <% end %>
-          </div>
-        </div>
+  <div class="container bottom-of-container">
+    <div class="w-100 bg-secondary-dark py-32px rounded rounded-2">
+      <div class="d-flex justify-content-center w-100 mb-40px fw-600">
+        <span class="fs-18 text-white header-font-family px-3"><span style="color: rgb(255, 255, 255);">Top tech companies hire our graduates</span></span>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mw-100 mw-md-85 mw-xl-75 m-auto px-3 px-md-0">
+        <img width="90" height="30" alt="Meta" loading="lazy" class="object-fit-cover img-fluid desaturated" src="https://www.lewagon.com/assets/v4/get_hired_logos/meta-1000bd9822134148abeab5600a9b4a0b614002dcfb2054d106c841f91e0c99ae.svg">
+        <img width="100" height="30" alt="Airbnb" class="object-fit-cover img-fluid mx-3 mx-md-0 desaturated" loading="lazy" src="https://www.lewagon.com/assets/v4/get_hired_logos/airbnb-ce774917dda4f9f65f7ba92e4ea59fdee8397925f277e471e775dcd13ef5e6fe.svg">
+        <img width="100" height="30" alt="Google" loading="lazy" class="object-fit-cover img-fluid desaturated" src="https://www.lewagon.com/assets/v4/get_hired_logos/google-f4f12d5b39b443ad63894731eebef4368beeadf20bb8bcd155a9695d71fdb0c2.svg">
+        <img width="130" height="30" alt="Accenture" class="d-none d-lg-block object-fit-cover img-fluid desaturated" loading="lazy" src="https://www.lewagon.com/assets/v4/get_hired_logos/accenture-b72cb0b931eaa5dbe54577d2289201ca8a82cf891f145afcb748e07c5210ba23.svg">
+        <img width="70" height="30" alt="IBM" loading="lazy" class="d-none d-md-block object-fit-cover img-fluid desaturated" src="https://www.lewagon.com/assets/v4/get_hired_logos/ibm-bd71ec9a1c2747f6ceb84e075db18fe14b6ae4d362c0064170f5efd119e42aab.svg">
+        <img width="120" height="30" alt="Shopify" loading="lazy" class="d-none d-md-block object-fit-cover img-fluid desaturated" src="https://www.lewagon.com/assets/v4/get_hired_logos/shopify-03ea0ad97604160401a69df09d5e7d25f25babfaddc869a3483a4b35aa6124d7.svg">
       </div>
     </div>
-  </div>
 </section>

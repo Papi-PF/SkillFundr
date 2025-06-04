@@ -17,11 +17,14 @@
           <%= form.submit "Continue Learning", class: "btn btn-info float-end", data: { turbo: false } %>
         <% end %>
       <% else %>
-        <%= form_with url: learning_paths_path, method: :post, class: "mt-3" do |form| %>
-          <%= form.hidden_field :skill_id, value: skill.id %>
-          <%= form.submit "start Learning", class: "btn btn-info float-end", data: { turbo: false } %>
-
-        <% end %>
+        <%# Replaced form with button_to version %>
+        <div class="mt-3">
+          <%= button_to "Start Learning",
+                        learning_paths_path(skill_id: skill.id),
+                        method: :post,
+                        class: "btn btn-info float-end",
+                        data: { turbo: false } %>
+        </div>
       <% end %>
     <% end %>
     </div>
