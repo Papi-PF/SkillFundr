@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  root "pages#landing"
   devise_for :users
 
-  root to: "pages#home"
+  get "/home", to: "pages#home"
+
   get "/dashboard", to: "pages#dashboard"
 
   resources :skills, only: [:index, :show]
