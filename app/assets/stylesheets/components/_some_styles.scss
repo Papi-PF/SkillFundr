@@ -1,0 +1,91 @@
+.justify-content-between {
+    justify-content: space-between !important
+}
+
+.justify-content-center {
+    justify-content: center !important
+}
+
+.align-items-center,.hs-form-field label {
+    align-items: center !important
+}
+
+
+.mw-100 {
+    max-width: 100% !important
+}
+
+ .mw-md-85 {
+    max-width: 85% !important
+}
+
+.mw-xl-75 {
+    max-width: 75% !important
+}
+
+.m-auto {
+    margin: auto !important
+}
+
+// .px-3,.btn-radio-check label.btn,.btn-radio-check label.hs-button,.btn-radio-check input[type=radio]:checked~label {
+//     padding-right: 1rem !important;
+//     padding-left: 1rem !important
+// }
+
+.px-md-0 {
+    padding-right: 0 !important;
+    padding-left: 0 !important
+}
+
+.d-flex,.hs-form-field label {
+    display: flex !important
+}
+
+.fw-600 {
+    font-weight: 600 !important
+}
+
+.fw-600 {
+    font-variation-settings: "wght" 550
+}
+
+.w-100,.hero-picture,.program-card-width-sm,.program-card-width,.navbar .dropdown-menu .tab-content:has(.active),.iti,.calendly-form .hs-campus .input,.calendly-form .hs_country_dropdown .input,.calendly-form .hs_latest_bootcamp_interest .input,.calendly-form .hs_latest_skill_course_interest .input,.calendly-form .hs-campus label,.calendly-form .hs_country_dropdown label,.calendly-form .hs_latest_bootcamp_interest label,.calendly-form .hs_latest_skill_course_interest label,.hs-button {
+    width: 100% !important
+}
+
+@media (max-width: 991.98px) {
+    .w-100-mobile {
+        width:100%
+    }
+}
+
+.mb-40px {
+    margin-bottom: 2.5rem !important
+}
+
+
+.bg-secondary-dark {
+    --bs-bg-opacity: 1;
+    background-color: #16205E !important
+}
+
+.py-32px {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important
+}
+
+// .rounded,.tab-item.active,.tab-item:hover,.iti .iti__selected-flag {
+//     border-radius: 5px !important
+// }
+
+.rounded-2 {
+    border-radius: 5px !important
+}
+
+.bottom-of-container {
+  margin-bottom: 59px;
+}
+
+h2 {
+  margin-top: 30px;
+}
