@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
+  root "pages#landing"
+
   devise_for :users
 
-  root to: "pages#home"
+  get "/home", to: "pages#home"
+
   get "/dashboard", to: "pages#dashboard"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :skills, only: [:index, :show]

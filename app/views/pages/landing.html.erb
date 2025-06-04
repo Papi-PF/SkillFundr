@@ -1,0 +1,20 @@
+<div class="video-container">
+  <video autoplay muted loop id="bg-video">
+    <source src="<%= asset_path('background.mp4') %>" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="video-overlay d-flex flex-column justify-content-center align-items-center text-center">
+    <h1 class="landing-title mb-4">Welcome to <span class="text-highlight">SkillFundr</span></h1>
+    <p class="lead mb-4">Your personalized journey to master new skills starts here.</p>
+
+    <% if user_signed_in? %>
+      <%= link_to "Go to Dashboard", dashboard_path, class: "btn btn-success btn-lg px-5 py-3 mb-3 animate__animated animate__fadeInUp" %>
+    <% else %>
+      <div class="d-flex gap-3">
+        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-lg px-5 py-3 animate__animated animate__fadeInLeft" %>
+        <%= link_to "Log In", new_user_session_path, class: "btn btn-outline-light btn-lg px-5 py-3 animate__animated animate__fadeInRight" %>
+      </div>
+    <% end %>
+  </div>
+</div>
