@@ -1,17 +1,363 @@
-learning-path.learning-path-card {
-  transition: transform 0.2s ease;
-  border-left: 4px solid #192062;
+// Updated Color Scheme
+$primary-color: #ffffff; // White
+$secondary-color: #f9fafb; // Light gray
+$accent-color: #4b5563; // Gray text
+$highlight-color: #3b82f6; // Vibrant blue
+$yellow: #f59e0b; // Amber accent
+$background-color: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 50%, #d1fae5 100%);
+$card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 
-  &:hover {
-    transform: scale(1.01);
+.learning-path-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+
+  &:before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $primary-color;
+    animation: gradientShift 15s ease infinite;
+    background-size: 200% 200%;
+    z-index: -1;
   }
 
-  .progress {
-    background-color: #e9ecef;
-    border-radius: 1rem;
+  .path-header {
+    padding: 2rem 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    background: rgba($primary-color, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(209, 213, 219, 0.5);
+    box-shadow: $card-shadow;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, $highlight-color, $accent-color);
+    }
+
+    h1 {
+      color: $accent-color;
+      font-weight: 800;
+      font-size: 2.5rem;
+      position: relative;
+      z-index: 2;
+      text-shadow: none;
+    }
+
+    .lead {
+      color: $accent-color;
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .level-badge {
+      margin-top: 1rem;
+      position: relative;
+      z-index: 2;
+
+      .badge {
+        background: linear-gradient(45deg, $highlight-color, lighten($highlight-color, 15%));
+        color: white;
+        border-radius: 50px;
+        font-weight: 600;
+        padding: 0.5rem 1.5rem;
+        box-shadow: 0 4px 15px rgba($highlight-color, 0.2);
+        border: 1px solid rgba(white, 0.3);
+      }
+    }
   }
 
-  .progress-bar {
-    border-radius: 1rem;
+  .journey-section {
+    background: rgba($primary-color, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    border: 1px solid rgba(209, 213, 219, 0.5);
+    box-shadow: $card-shadow;
+    overflow: hidden;
+    position: relative;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, $highlight-color, $accent-color);
+    }
+
+    h2 {
+      color: $accent-color;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+      text-shadow: none;
+    }
+
+    .progress-container {
+      background: rgba($secondary-color, 0.8);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 0 2rem 2rem;
+      border: 1px solid rgba(209, 213, 219, 0.5);
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+
+      span {
+        color: $accent-color;
+        font-weight: 500;
+      }
+
+      .progress {
+        height: 12px;
+        border-radius: 10px;
+        background: rgba(229, 231, 235, 0.8);
+        box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        margin-top: 0.8rem;
+      }
+
+      .progress-bar {
+        background: linear-gradient(90deg, $highlight-color, lighten($accent-color, 10%));
+        box-shadow: 0 0 10px rgba($highlight-color, 0.2);
+      }
+    }
   }
+
+  .milestones-container {
+    .milestone-card {
+      display: flex;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      background: rgba($primary-color, 0.9);
+      margin: 0 2rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(209, 213, 219, 0.5);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        background: rgba($primary-color, 1);
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &.completed {
+        background: rgba(239, 246, 255, 0.7);
+        border-left: 3px solid $highlight-color;
+
+        .milestone-content {
+          h3, p {
+            opacity: 0.9;
+          }
+        }
+      }
+
+      .milestone-status {
+        margin-right: 1.5rem;
+
+        .status-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          border: 2px solid $highlight-color;
+          border-radius: 50%;
+          font-size: 18px;
+          color: $highlight-color;
+          background: rgba($highlight-color, 0.1);
+          transition: all 0.3s ease;
+
+          &.completed {
+            background: linear-gradient(135deg, $highlight-color, $accent-color);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba($highlight-color, 0.2);
+          }
+        }
+      }
+
+      .milestone-content {
+        flex: 1;
+
+        h3 {
+          font-size: 1.3rem;
+          font-weight: 700;
+          color: $accent-color;
+          margin-bottom: 0.5rem;
+          display: flex;
+          align-items: center;
+
+          &:before {
+            content: "●";
+            color: $highlight-color;
+            font-size: 0.8rem;
+            margin-right: 0.8rem;
+          }
+        }
+
+        p {
+          color: $accent-color;
+          margin-bottom: 1.25rem;
+          font-size: 0.95rem;
+          line-height: 1.6;
+          opacity: 0.9;
+        }
+
+        .badge {
+          background: rgba($highlight-color, 0.15);
+          color: $highlight-color;
+          border-radius: 50px;
+          font-weight: 600;
+          padding: 0.5rem 1rem;
+          border: 1px solid rgba($highlight-color, 0.2);
+        }
+
+        .btn {
+          background: linear-gradient(45deg, $highlight-color, darken($highlight-color, 10%));
+          color: white;
+          border-radius: 50px;
+          padding: 0.5rem 1.5rem;
+          border: none;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px rgba($highlight-color, 0.2);
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+          &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba($highlight-color, 0.25);
+            background: linear-gradient(45deg, lighten($highlight-color, 5%), darken($highlight-color, 5%));
+          }
+        }
+      }
+    }
+
+    .generating-message {
+      padding: 3rem 0;
+      text-align: center;
+      background: rgba($primary-color, 0.85);
+      border-radius: 16px;
+      margin: 0 2rem;
+      border: 1px dashed rgba($highlight-color, 0.3);
+
+      .spinner-border {
+        width: 3rem;
+        height: 3rem;
+        border-width: 0.2em;
+        color: $highlight-color;
+      }
+
+      h3 {
+        color: $accent-color;
+        font-weight: 700;
+        margin-top: 1.5rem;
+      }
+
+      p {
+        color: $accent-color;
+        max-width: 500px;
+        margin: 0 auto;
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+// Animated background particles
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  overflow: hidden;
+
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: float 8s infinite ease-in-out;
+
+    &:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: 10%;
+      left: 5%;
+      animation-duration: 15s;
+      background: rgba(59, 130, 246, 0.05);
+      border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+
+    &:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      top: 60%;
+      left: 80%;
+      animation-duration: 12s;
+      background: rgba(245, 158, 11, 0.05);
+      border: 1px solid rgba(245, 158, 11, 0.1);
+    }
+
+    &:nth-child(3) {
+      width: 150px;
+      height: 150px;
+      top: 30%;
+      left: 70%;
+      animation-duration: 10s;
+      background: rgba(16, 185, 129, 0.05);
+      border: 1px solid rgba(16, 185, 129, 0.1);
+    }
+  }
+}
+
+// Gradient animation
+@keyframes gradientShift {
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}
+
+// Confetti styles
+.confetti-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--c);
+  top: calc(var(--y) * 1%);
+  left: calc(var(--x) * 1%);
+  border-radius: 50%;
+  animation: confetti 1s ease-out forwards;
+}
+
+@keyframes confetti {
+  0% { transform: translate(0,0) rotate(0); opacity: 1; }
+  100% { transform: translate(calc((var(--x) - 50) * 0.5px), calc((var(--y) - 100) * 1px)) rotate(360deg); opacity: 0; }
 }

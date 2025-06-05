@@ -1,21 +1,23 @@
 <h1 class="dashboard-title">My Learning Paths</h1>
 
 <div class="dashboard-container">
-  <% current_user.learning_paths.each do |lp| %>
-    <% completed = lp.milestones.where(completed: true).count %>
-    <% total = lp.milestones.count %>
+  <% current_user.learning_paths.each do |learning_path| %>
+    <% completed = learning_path.milestones.where(completed: true).count %>
+    <% total = learning_path.milestones.count %>
     <% percent = total > 0 ? (completed.to_f / total * 100).round : 0 %>
 
     <div class="learning-card">
       <div class="card-header">
         <h5 class="skill-title">
-          <%= link_to lp.skill.name, learning_path_path(lp), class: "skill-link" %>
+          <%= link_to learning_path.skill.name,
+                      learning_path_path(learning_path),
+                      class: "skill-link" %>
         </h5>
         <small><%= completed %> / <%= total %> milestones</small>
       </div>
 
       <div class="card-body">
-        <p class="skill-description"><%= lp.skill.description %></p>
+        <p class="skill-description"><%= learning_path.skill.description %></p>
 
         <div class="progress">
           <div class="progress-bar" style="width: <%= percent %>%;" role="progressbar" aria-valuenow="<%= completed %>" aria-valuemin="0" aria-valuemax="<%= total %>"></div>
@@ -24,7 +26,12 @@
 
       <div class="card-footer">
         <small class="progress-label">Progress: <%= percent %>%</small>
-        <%= button_to learning_path_path(lp), method: :delete, data: { turbo_method: :delete, confirm: "Are you sure you want to delete this learning path?" }, class: "delete-icon", title: "Delete" do %>
+        <%= button_to learning_path_path(learning_path),
+                      method: :delete,
+                      data: { turbo_method: :delete,
+                              confirm: "Are you sure you want to delete this learning path?" },
+                      class: "delete-icon",
+                      title: "Delete" do %>
           🗑️
         <% end %>
       </div>

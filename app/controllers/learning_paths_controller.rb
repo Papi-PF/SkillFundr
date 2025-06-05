@@ -20,15 +20,19 @@ class LearningPathsController < ApplicationController
     @learning_path = LearningPath.find(params[:id])
     @milestones = @learning_path.milestones.order(position: :asc)
 
+    # Initialize progress stats
     if @milestones.any?
       @completed_count = @milestones.where(completed: true).count
       @completion_percentage = (@completed_count.to_f / @milestones.count) * 100
+    else
+      @completed_count = 0
+      @completion_percentage = 0
     end
   end
 
   def create_from_skill
     skill_id = params[:skill_id]
-    current_user.learning_paths.create(skill_id: skill_id)
+    learning_path = current_user.learning_paths.find_or_create_by(skill_id: skill_id)
     redirect_to dashboard_path, notice: "Continuing your learning on this skill"
   end
 

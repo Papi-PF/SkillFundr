@@ -1,7 +1,7 @@
 class MilestonesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_learning_path, only: [:mark_complete]
-  before_action :set_milestone, only: [:mark_complete]
+  before_action :set_learning_path
+  before_action :set_milestone, only: [:update]
 
   # GET /milestones/1
   def show
@@ -9,13 +9,24 @@ class MilestonesController < ApplicationController
 
   # PATCH /milestones/1
   def update
-    # Update the milestone with new params
     if @milestone.update(milestone_params)
-      # When successful, redirect back to the learning path
-      redirect_to learning_path_path(@milestone.learning_path), notice: "Milestone marked as completed!"
+      respond_to do |format|
+        format.json {
+          render json: {
+            status: 'success',
+            completion_percentage: @learning_path.completion_percentage,
+            completed_count: @learning_path.completed_milestones_count,
+            total_milestones: @learning_path.milestones.count
+          }
+        }
+      end
     else
-      # If not redirect back with an error message
-      redirect_to learning_path_path(@milestone.learning_path), alert: "Failed to mark milestone as completed."
+      respond_to do |format|
+        format.json {
+          render json: { status: 'error' },
+          status: :unprocessable_entity
+        }
+      end
     end
   end
 
@@ -33,18 +44,32 @@ class MilestonesController < ApplicationController
     end
   end
 
-  private
-
-  def set_milestone
-    @milestone = Milestone.find_by(id: params[:id])
-    # Optional: Add logging for debugging
-    # Rails.logger.debug "Milestone: #{@milestone.inspect}"
-  end
+ private
 
   def set_learning_path
-    @learning_path = @milestone&.learning_path
-    # Optional: Add logging for debugging
-    # Rails.logger.debug "Learning Path: #{@learning_path.inspect}"
+    @learning_path = LearningPath.find_by(id: params[:learning_path_id])
+
+    unless @learning_path
+      respond_to do |format|
+        format.json {
+          render json: { status: 'error', message: 'Learning path not found' },
+          status: :not_found
+        }
+      end
+    end
+  end
+
+  def set_milestone
+    @milestone = @learning_path.milestones.find_by(id: params[:id])
+
+    unless @milestone
+      respond_to do |format|
+        format.json {
+          render json: { status: 'error', message: 'Milestone not found' },
+          status: :not_found
+        }
+      end
+    end
   end
 
   def milestone_params
