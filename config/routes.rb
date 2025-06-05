@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :skills, only: [:index, :show]
   resources :learning_paths, only: [:create, :show, :destroy] do
-    resources :milestones, only: [] do
+    resources :milestones, only: [:update] do
       member do
         patch :mark_complete
       end

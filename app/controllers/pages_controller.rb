@@ -16,6 +16,6 @@ class PagesController < ApplicationController
   # GET /dashboard
   def dashboard
     # Show's learning path of current user
-    @learning_paths = current_user.learning_paths
+    @learning_paths = current_user.learning_paths.includes(:skill, :milestones).distinct
   end
 end
