@@ -10,6 +10,7 @@ class MilestonesController < ApplicationController
   # PATCH /milestones/1
   def update
     if @milestone.update(milestone_params)
+      current_user.update_funding_eligibility! if @milestone.completed?
       respond_to do |format|
         format.html { redirect_to learning_path_path(@learning_path) }
         format.json {

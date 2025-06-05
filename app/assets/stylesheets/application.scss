@@ -253,6 +253,16 @@ $shadow: rgba(22, 32, 94, 0.2);
   }
 }
 
+.navbar {
+  .funding-eligible {
+    color: #28a745;
+    font-weight: 600;
+    &:hover {
+      color: darken(#28a745, 10%);
+    }
+  }
+}
+
 // Toggler button
 .navbar-toggler {
   border: 2px solid $primary;
