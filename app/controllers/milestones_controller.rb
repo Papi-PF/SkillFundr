@@ -11,6 +11,7 @@ class MilestonesController < ApplicationController
   def update
     if @milestone.update(milestone_params)
       respond_to do |format|
+        format.html { redirect_to learning_path_path(@learning_path) }
         format.json {
           render json: {
             status: 'success',
