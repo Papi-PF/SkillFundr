@@ -19,15 +19,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_03_163000) do
     t.bigint "skill_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status"
-    t.boolean "ai_generated"
+    t.boolean "ai_generated", default: false
     t.index ["skill_id"], name: "index_learning_paths_on_skill_id"
     t.index ["user_id"], name: "index_learning_paths_on_user_id"
-  end
-
-  create_table "learning_paths_tables", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "milestones", force: :cascade do |t|
@@ -41,11 +35,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_03_163000) do
     t.integer "estimated_days"
     t.text "metadata"
     t.index ["learning_path_id"], name: "index_milestones_on_learning_path_id"
-  end
-
-  create_table "milestones_tables", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "skills", force: :cascade do |t|
