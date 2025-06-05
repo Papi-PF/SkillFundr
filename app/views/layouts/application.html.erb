@@ -3,6 +3,13 @@
   <head>
     <%= favicon_link_tag 'favicon.ico' %>
     <title><%= content_for(:title) || "Skill Fundr" %></title>
+        <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="<%= content_for?(:title) ? yield(:title) : 'SkillFundr – Crowdfund Your Learning Journey' %>" />
+    <meta property="og:description" content="SkillFundr helps users fund their education and upskill through community support." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:image" content="<%= image_url('SkillFundr Logo Design.png') %>" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
