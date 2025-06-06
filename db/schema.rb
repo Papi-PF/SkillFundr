@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_05_152617) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_06_025036) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,7 +53,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_05_152617) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "difficulty"
+    t.string "difficulty", default: "Beginner"
+    t.boolean "featured", default: false
+    t.index ["featured"], name: "index_skills_on_featured"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,5 +1,7 @@
 class AddFundingEligibilityToUsers < ActiveRecord::Migration[7.2]
   def change
-    add_column :users, :funding_eligibility, :boolean, default: false
+    unless column_exists?(:users, :funding_eligibility)
+      add_column :users, :funding_eligibility, :boolean, default: false
+    end
   end
 end
