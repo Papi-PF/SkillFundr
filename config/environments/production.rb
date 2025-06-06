@@ -103,4 +103,10 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  # Enable serving static files (needed unless handled by NGINX or similar)
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present? || true
+
+  # Compress CSS using SASS (optional)
+  config.assets.css_compressor = :sass
+
 end

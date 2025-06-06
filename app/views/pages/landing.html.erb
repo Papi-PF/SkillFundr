@@ -1,22 +1,47 @@
 <% provide(:title, "SkillFundr - Crowdfund Your Learning Journey") %>
-
-<div class="video-container">
-  <video autoplay muted loop id="bg-video">
+<div class="video-container position-relative">
+  <!-- Video with accessibility features -->
+  <video
+    autoplay
+    muted
+    loop
+    id="bg-video"
+    aria-label="Background animation of people learning new skills"
+    poster="<%= asset_path('video-poster.jpg') %>"
+    playsinline
+    preload="auto"
+  >
     <source src="<%= asset_path('background.mp4') %>" type="video/mp4">
-    Your browser does not support the video tag.
+    <!-- Fallback content -->
+    <div class="video-fallback" style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);"></div>
   </video>
 
-  <div class="video-overlay d-flex flex-column justify-content-center align-items-center text-center">
-    <h1 class="landing-title mb-4">Welcome to <span class="text-highlight">SkillFundr</span></h1>
-    <p class="lead mb-4">Your personalized journey to master new skills starts here.</p>
+  <!-- Content overlay with semantic markup -->
+  <section class="video-overlay d-flex flex-column justify-content-center align-items-center text-center px-3">
+    <header>
+      <h1 class="landing-title mb-4">
+        Welcome to <span class="text-highlight" aria-label="Skill Fundr">SkillFundr</span>
+      </h1>
+    </header>
+
+    <p class="lead mb-4 mx-auto" style="max-width: 600px;">
+      Your personalized journey to master new skills starts here.
+    </p>
 
     <% if user_signed_in? %>
-      <%= link_to "Go to Dashboard", dashboard_path, class: "btn btn-success btn-lg px-5 py-3 mb-3 animate__animated animate__fadeInUp" %>
+      <%= link_to "Go to Dashboard", dashboard_path,
+          class: "btn btn-success btn-lg px-5 py-3 mb-3 animate__animated animate__fadeInUp",
+          aria: { label: "Go to your dashboard" } %>
     <% else %>
-      <div class="d-flex gap-3">
-        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-lg px-5 py-3 animate__animated animate__fadeInLeft" %>
-        <%= link_to "Log In", new_user_session_path, class: "btn btn-outline-light btn-lg px-5 py-3 animate__animated animate__fadeInRight" %>
+      <div class="d-flex flex-wrap gap-3 justify-content-center">
+        <%= link_to "Get Started", new_user_registration_path,
+            class: "btn btn-primary btn-lg px-5 py-3 animate__animated animate__fadeInLeft",
+            aria: { label: "Sign up for SkillFundr" } %>
+
+        <%= link_to "Log In", new_user_session_path,
+            class: "btn btn-outline-light btn-lg px-5 py-3 animate__animated animate__fadeInRight",
+            aria: { label: "Log in to your account" } %>
       </div>
     <% end %>
-  </div>
+  </section>
 </div>
