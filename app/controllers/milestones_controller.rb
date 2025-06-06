@@ -12,16 +12,17 @@ class MilestonesController < ApplicationController
     if @milestone.update(milestone_params)
       current_user.update_funding_eligibility! if @milestone.completed?
       respond_to do |format|
-        format.html { redirect_to learning_path_path(@learning_path) }
-        format.json {
-          render json: {
-            status: 'success',
-            completion_percentage: @learning_path.completion_percentage,
-            completed_count: @learning_path.completed_milestones_count,
-            total_milestones: @learning_path.milestones.count
-          }
+      format.html { redirect_to learning_path_path(@learning_path) }
+      format.json {
+        render json: {
+          status: 'success',
+          completion_percentage: @learning_path.completion_percentage,
+          completed_count: @learning_path.completed_milestones_count,
+          total_milestones: @learning_path.milestones.count,
+          funding_eligible: current_user.funding_eligibility?
         }
-      end
+      }
+    end
     else
       respond_to do |format|
         format.json {
