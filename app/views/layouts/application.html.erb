@@ -2,9 +2,9 @@
 <html>
   <head>
     <%= favicon_link_tag 'favicon.ico' %>
-    <title><%= content_for(:title) || "Skill Fundr" %></title>
+    <title><%= content_for(:title) || "SkillFundr – Crowdfund Your Learning Journey" %></title>
         <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="<%= content_for?(:title) ? yield(:title) : 'SkillFundr – Crowdfund Your Learning Journey' %>" />
+    <meta property="og:title" content="<%= content_for?(:title) ? yield(:title) : 'SkillFundr - Crowdfund Your Learning Journey' %>" />
     <meta property="og:description" content="SkillFundr helps users fund their education and upskill through community support." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="<%= request.original_url %>" />
