@@ -5,7 +5,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # Check if user has completed at least 2 different skills
+  # Check if user has completed at least 3 different skills
   def update_funding_eligibility!
     completed_skills_count = learning_paths.joins(:milestones)
                                          .where(milestones: { completed: true })
@@ -13,7 +13,7 @@ class User < ApplicationRecord
                                          .distinct
                                          .count
 
-    update(funding_eligibility: completed_skills_count >= 2)
+    update(funding_eligibility: completed_skills_count >= 3)
   end
 
   # Helper method to check completed skills count
