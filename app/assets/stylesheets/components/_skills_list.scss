@@ -81,10 +81,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
 
     &.active {
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
       border: 1px solid #fff;
+      background-color: rgba(25, 32, 98, 0.1);
     }
 
     &:hover {

@@ -16,8 +16,9 @@ class Skill < ApplicationRecord
     beginner: "Beginner",
     intermediate: "Intermediate",
     advanced: "Advanced"
-  }
+  }, _default: "Beginner"
 
   validates :name, presence: true
   validates :description, presence: true
+  validates :difficulty, presence: true
 end

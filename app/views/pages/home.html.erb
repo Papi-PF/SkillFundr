@@ -18,15 +18,13 @@
       </div>
     </div>
   </div>
-
   <!-- Animated Background Elements -->
   <div class="hero-shape-1"></div>
   <div class="hero-shape-2"></div>
   <div class="hero-shape-3"></div>
   <div class="hero-particles"></div>
 </section>
-
-<!-- Featured Courses -->
+<!-- Featured Courses Section -->
 <section class="py-6 py-lg-8 bg-white">
   <div class="container pt-3">
     <div class="row justify-content-center mb-5">
@@ -37,7 +35,6 @@
         </p>
       </div>
     </div>
-
     <div class="row g-4">
       <% if @featured_skills.any? %>
         <% @featured_skills.each do |skill| %>
@@ -48,47 +45,28 @@
                 <p class="card-text text-muted mb-4"><%= skill.description.to_s.truncate(120) %></p>
                 <div class="d-flex justify-content-between align-items-center mt-auto">
                   <span class="badge rounded-pill px-3 py-2" style="background-color: #e0eeff; color: #16205E;">
-                    <%= skill.difficulty&.capitalize || "N/A" %>
+                    <%= skill.difficulty&.capitalize || "Beginner" %>
                   </span>
                   <span class="text-muted">8 weeks</span>
                 </div>
               </div>
               <div class="card-footer bg-transparent border-0 p-4 pt-0">
-                <%= link_to "Start Learning", skill_path(skill), class: "btn btn-outline-primary w-100", style: "color: #188BD2; border-color: #188BD2;" %>
+                <%= link_to "Start Learning", skill_path(skill),
+                    class: "btn btn-outline-primary w-100",
+                    style: "color: #188BD2; border-color: #188BD2;" %>
               </div>
             </div>
           </div>
         <% end %>
       <% else %>
-        <!-- Fallback static courses -->
-        <% [
-          { name: "Full-stack Web Development", desc: "Learn both front-end and back-end development to become a full-stack developer." },
-          { name: "Data Science", desc: "Master Python, SQL, and machine learning to analyze and interpret complex data." },
-          { name: "Mobile App Development", desc: "Build native and cross-platform mobile applications for iOS and Android." }
-        ].each do |course| %>
-          <div class="col-md-6 col-lg-4">
-            <div class="course-card card border-0 shadow-sm h-100">
-              <div class="card-body p-4">
-                <h3 class="h4 mb-3 text-dark"><%= course[:name] %></h3>
-                <p class="card-text text-muted mb-4"><%= course[:desc] %></p>
-                <div class="d-flex justify-content-between align-items-center mt-auto">
-                  <span class="badge rounded-pill px-3 py-2" style="background-color: #e0eeff; color: #16205E;">
-                    Beginner
-                  </span>
-                  <span class="text-muted">8 weeks</span>
-                </div>
-              </div>
-              <div class="card-footer bg-transparent border-0 p-4 pt-0">
-                <a href="#" class="btn btn-outline-primary w-100" style="color: #188BD2; border-color: #188BD2;">Start Learning</a>
-              </div>
-            </div>
-          </div>
-        <% end %>
+        <div class="col-12 text-center py-5">
+          <p class="text-muted">Courses coming soon!</p>
+          <%= link_to "Explore Skills", skills_path, class: "btn btn-primary" %>
+        </div>
       <% end %>
     </div>
   </div>
 </section>
-
 <!-- Testimonial & Companies -->
 <section class="py-6 py-lg-8" style="background-color: #f8fafc;">
   <div class="container">
@@ -102,7 +80,6 @@
           <div class="bg-white p-4 p-md-5 rounded-3 shadow-sm">
             <div class="d-flex align-items-start mb-4">
               <div class="flex-shrink-0">
-
               </div>
               <div class="flex-grow-1">
                 <h3 class="h5 mb-1 text-dark">Daniela, Software Engineer</h3>
@@ -114,14 +91,16 @@
                   <i class="bi bi-star-fill"></i>
                 </div>
                 <blockquote class="mb-0 text-muted">
-                  "The AI specialization program completely transformed my career. Within 3 months of completing the course, I doubled my salary at a top tech company."
+                  <p>"The Full-Stack Web Development roadmap didn’t just guide me—it launched me.</p>
+                  <p>In three months, I went from career uncertainty to a funded future in tech.</p>
+                  <p>I mastered two key skills, secured a bootcamp spot, and gained total confidence.</p>
+                  <p>This wasn’t a step forward—it was a quantum leap."</p>
                 </blockquote>
               </div>
             </div>
           </div>
         </div>
       </div>
-
   <div class="container bottom-of-container">
     <div class="w-100 bg-secondary-dark py-32px rounded rounded-2">
       <div class="d-flex justify-content-center w-100 mb-40px fw-600">

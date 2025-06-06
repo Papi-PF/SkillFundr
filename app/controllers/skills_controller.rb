@@ -14,5 +14,7 @@ class SkillsController < ApplicationController
     @skill = Skill.find(params[:id])
     # look for the skills based on ID via url
     @milestones = @skill.milestones.order(:position)
+  rescue ActiveRecord::RecordNotFound
+    redirect_to skills_path, alert: "Course not found. Please select from available courses."
   end
 end

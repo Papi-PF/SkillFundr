@@ -1,6 +1,5 @@
 <div class="skills-list-container" data-controller="skills-list">
   <div class="overlay"></div>
-
   <div class="skills-scroll">
     <% @skills.each do |skill| %>
       <%= link_to skill_path(skill),
@@ -10,7 +9,6 @@
           turbo_action: :advance,
           action: "click->skills-list#highlight",
           skills_list_target: "skill" } do %>
-
         <span><%= skill.name %></span>
         <i class="bi bi-arrow-right-circle-fill ms-2"></i>
       <% end %>
