@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get "/home", to: "pages#home"
-
+  get "/congratulations", to: "pages#congratulations"
   get "/dashboard", to: "pages#dashboard"
 
   resources :skills, only: [:index, :show]

@@ -60,7 +60,7 @@
                   <%= form_with model: milestone,
                                 url: learning_path_milestone_path(@learning_path, milestone),
                                 method: :patch,
-                                data: { remote: true },
+                                data: { turbo: false, remote: true },  # <- Add `turbo: false`
                                 class: "d-inline" do |f| %>
                     <%= f.hidden_field :completed, value: true %>
                     <%= f.submit "Mark Complete", class: "btn" %>
